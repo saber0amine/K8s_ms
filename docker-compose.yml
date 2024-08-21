@@ -1,6 +1,85 @@
 version: '3.8'
 
 services:
+  customer-service:
+    build : ./customer-service
+    container_name: customer-service-container
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      retries: 4
+    depends_on :
+      config-service:
+        condition: service_healthy
+
+  inventory-service:
+    build : ./inventory-service
+    container_name: inventory-service-container
+    ports:
+      - "8082:8082"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      retries: 4
+    depends_on :
+      config-service:
+        condition: service_healthy
+  order-service:
+    build : ./order-service
+    container_name: order-service-container
+    ports:
+      - "8083:8083"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+      interval: 10s
+      retries: 4
+    depends_on :
+      customer-service:
+        condition: service_healthy
+      inventory-service:
+        condition: service_healthy
+
+  geteway-service:
+    build : ./geteway-service
+    container_name: geteway-service-container
+    ports:
+      - "9999:9999"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9999/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+      config-service:
+        condition: service_healthy
+
+  consul-vault-service:
+    build : ./service-vault-consulCoonfig
+    container_name: vault-consulCoonfig-service-container
+    ports:
+      - "8084:8084"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
+      interval: 10s
+      retries: 4
+    depends_on :
+      consul:
+        condition: service_healthy
+      vault:
+        condition: service_healthy
+  config-service:
+    build : ./config-service
+    container_name: config-service-container
+    ports:
+      - "8888:8888"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      retries: 4
+    depends_on :
+      consul-vault-service:
+        condition: service_healthy
   consul:
     image: consul:1.11.4
     container_name: consul-container
