@@ -1,22 +1,10 @@
 pipeline {
     agent any
 
-    environment {
-        REGISTRY = ''
-        REGISTRY_CREDENTIAL = ''
-    }
+
 
     stages {
-        stage('Set Credentials') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        env.REGISTRY = USERNAME
-                        env.REGISTRY_CREDENTIAL = PASSWORD
-                    }
-                }
-            }
-        }
+      
 
         stage('Checkout') {
             steps {
@@ -27,12 +15,14 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    docker.build("${env.REGISTRY}/customer-service", "customer-service/")
-                    docker.build("${env.REGISTRY}/inventory-service", "inventory-service/")
-                    docker.build("${env.REGISTRY}/order-service", "order-service/")
-                    docker.build("${env.REGISTRY}/config-service", "config-service/")
-                    docker.build("${env.REGISTRY}/gateway-service", "gateway-service/")
-                    docker.build("${env.REGISTRY}/consul-vault-service", "service-vault-consulCoonfig/")
+                       withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'REGISTRY', passwordVariable: 'REGISTRY_CREDENTIAL')]) {                        
+                    docker.build("${REGISTRY}/customer-service", "customer-service/")
+                    docker.build("${REGISTRY}/inventory-service", "inventory-service/")
+                    docker.build("${REGISTRY}/order-service", "order-service/")
+                    docker.build("${REGISTRY}/config-service", "config-service/")
+                    docker.build("${REGISTRY}/gateway-service", "geteway-service/")
+                    docker.build("${REGISTRY}/consul-vault-service", "service-vault-consulCoonfig/")
+                }
                 }
             }
         }
@@ -40,14 +30,16 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script {
+                        withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'REGISTRY', passwordVariable: 'REGISTRY_CREDENTIAL')]) {   
                     docker.withRegistry('', "${env.REGISTRY_CREDENTIAL}") {
-                        docker.image("${env.REGISTRY}/customer-service").push('latest')
-                        docker.image("${env.REGISTRY}/inventory-service").push('latest')
-                        docker.image("${env.REGISTRY}/order-service").push('latest')
-                        docker.image("${env.REGISTRY}/config-service").push('latest')
-                        docker.image("${env.REGISTRY}/gateway-service").push('latest')
-                        docker.image("${env.REGISTRY}/consul-vault-service").push('latest')
+                        docker.image("${env.REGISTRY}/customer-service").push('0.0.1')
+                        docker.image("${env.REGISTRY}/inventory-service").push('0.0.1')
+                        docker.image("${env.REGISTRY}/order-service").push('0.0.1')
+                        docker.image("${env.REGISTRY}/config-service").push('0.0.1')
+                        docker.image("${env.REGISTRY}/geteway-service").push('0.0.1')
+                        docker.image("${env.REGISTRY}/consul-vault-service").push('0.0.1')
                     }
+                     }
                 }
             }
         }
