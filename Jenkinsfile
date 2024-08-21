@@ -10,7 +10,7 @@ pipeline {
         stage('Set Credentials') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         env.REGISTRY = USERNAME
                         env.REGISTRY_CREDENTIAL = PASSWORD
                     }
