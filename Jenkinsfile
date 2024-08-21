@@ -17,6 +17,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/saber0amine/K8s_ms.git', branch: 'master'
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 script {
