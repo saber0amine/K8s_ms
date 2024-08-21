@@ -27,14 +27,14 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'REGISTRY', passwordVariable: 'REGISTRY_CREDENTIAL')]) {
-                        docker.withRegistry('', "${REGISTRY_CREDENTIAL}") {
+                            ssh "docker login -u ${REGISTRY} -p ${REGISTRY_CREDENTIAL}"
                             docker.image("${REGISTRY}/customer-service").push('0.0.1')
                             docker.image("${REGISTRY}/inventory-service").push('0.0.1')
                             docker.image("${REGISTRY}/order-service").push('0.0.1')
                             docker.image("${REGISTRY}/config-service").push('0.0.1')
                             docker.image("${REGISTRY}/gateway-service").push('0.0.1')
                             docker.image("${REGISTRY}/consul-vault-service").push('0.0.1')
-                        }
+
                     }
                 }
             }
