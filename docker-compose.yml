@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  consul:
+    image: consul:1.11.4
+    container_name: consul-container
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+    command: agent -server -bootstrap-expect=1 -ui -client=0.0.0.0 -bind=0.0.0.0
+    volumes:
+      - consul_data:/consul/data
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault-container
+    ports:
+      - "8200:8200"
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=saber
+      - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
+    command: server -dev -dev-root-token-id=saber -dev-listen-address=0.0.0.0:8200
+    volumes:
+      - ./service-vault-consulCoonfig/vault_data_container:/vault/data
+
+volumes:
+  consul_data:
