@@ -17,7 +17,6 @@ pipeline {
                         docker.build("${REGISTRY}/order-service", "order-service/")
                         docker.build("${REGISTRY}/config-service", "config-service/")
                         docker.build("${REGISTRY}/geteway-service", "geteway-service/")
-                        docker.build("${REGISTRY}/consul-vault-service", "service-vault-consulCoonfig/")
                     }
                 }
             }
@@ -33,7 +32,7 @@ pipeline {
                         docker.image("${REGISTRY}/order-service").push('0.0.1')
                         docker.image("${REGISTRY}/config-service").push('0.0.1')
                         docker.image("${REGISTRY}/geteway-service").push('0.0.1')
-                        docker.image("${REGISTRY}/consul-vault-service").push('0.0.1')
+
                     }
                 }
             }
@@ -48,6 +47,9 @@ pipeline {
                          sh '''
                          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                           install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+                          pwd
+                          ls
+                          kubectl get pods
                           kubectl apply -f Springboot-k8s-main/
                          '''
                            }
