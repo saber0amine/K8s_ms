@@ -41,13 +41,15 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            steps {
-                script {
-
-                    withEnv(["KUBECONFIG=/root/.kube/config"]) {
-                        sh "kubectl apply -f Springboot-k8s-main/"
-
-                }
+                        agent {
+                            docker {
+                                image 'gcr.io/k8s-minikube/kicbase:v0.0.44'
+                                args '-v /root/.kube:/root/.kube'  /
+                            }
+                        }
+                         steps {
+                            script {
+                         sh "kubectl apply -f Springboot-k8s-main/"
                 }
             }
         }
