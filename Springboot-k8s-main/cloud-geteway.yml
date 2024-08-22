@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cloud-geteway-app
-          image: aminesbaer/geteway-service:0.0.1
+          image: aminesaber/geteway-service:0.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 9999
