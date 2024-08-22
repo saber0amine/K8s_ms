@@ -15,8 +15,8 @@ pipeline {
 //                         docker.build("${REGISTRY}/customer-service:0.0.1", "customer-service/")
 //                         docker.build("${REGISTRY}/inventory-service:0.0.1", "inventory-service/")
 //                         docker.build("${REGISTRY}/order-service:0.0.1", "order-service/")
-                       // docker.build("${REGISTRY}/config-service:0.0.1", "config-service/")
-                       // docker.build("${REGISTRY}/geteway-service:0.0.1", "geteway-service/")
+                         docker.build("${REGISTRY}/config-service:0.0.1", "config-service/")
+                         docker.build("${REGISTRY}/geteway-service:0.0.1", "geteway-service/")
                     }
                 }
             }
@@ -30,8 +30,8 @@ pipeline {
 //                         docker.image("${REGISTRY}/customer-service:0.0.1").push()
 //                         docker.image("${REGISTRY}/inventory-service:0.0.1").push()
 //                         docker.image("${REGISTRY}/order-service:0.0.1").push()
-                        //docker.image("${REGISTRY}/config-service:0.0.1").push()
-                        //docker.image("${REGISTRY}/geteway-service:0.0.1").push()
+                        docker.image("${REGISTRY}/config-service:0.0.1").push()
+                        docker.image("${REGISTRY}/geteway-service:0.0.1").push()
                     }
                 }
             }
@@ -46,12 +46,11 @@ pipeline {
                             sh '''
                             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-                            pwd
-                            ls
                              kubectl delete -f Springboot-k8s-main/service-registry.yml
+
                              kubectl apply -f Springboot-k8s-main/service-registry.yml
-                             sleep 10s
-                             kubectl logs consul-0
+                             kubectl apply -f Springboot-k8s-main/config-server.yml
+                             kubectl apply -f Springboot-k8s-main/cloud-geteway.yml
 
                             '''
                         }
