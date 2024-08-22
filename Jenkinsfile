@@ -16,7 +16,7 @@ pipeline {
                         docker.build("${REGISTRY}/inventory-service", "inventory-service/")
                         docker.build("${REGISTRY}/order-service", "order-service/")
                         docker.build("${REGISTRY}/config-service", "config-service/")
-                        docker.build("${REGISTRY}/gateway-service", "geteway-service/")
+                        docker.build("${REGISTRY}/gateway-service", "gateway-service/") // Fixed typo
                         docker.build("${REGISTRY}/consul-vault-service", "service-vault-consulCoonfig/")
                     }
                 }
@@ -27,38 +27,35 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'REGISTRY', passwordVariable: 'REGISTRY_CREDENTIAL')]) {
-                            sh "docker login -u ${REGISTRY} -p ${REGISTRY_CREDENTIAL}"
-                            docker.image("${REGISTRY}/customer-service").push('0.0.1')
-                            docker.image("${REGISTRY}/inventory-service").push('0.0.1')
-                            docker.image("${REGISTRY}/order-service").push('0.0.1')
-                            docker.image("${REGISTRY}/config-service").push('0.0.1')
-                            docker.image("${REGISTRY}/gateway-service").push('0.0.1')
-                            docker.image("${REGISTRY}/consul-vault-service").push('0.0.1')
-
+                        sh "docker login -u ${REGISTRY} -p ${REGISTRY_CREDENTIAL}"
+                        docker.image("${REGISTRY}/customer-service").push('0.0.1')
+                        docker.image("${REGISTRY}/inventory-service").push('0.0.1')
+                        docker.image("${REGISTRY}/order-service").push('0.0.1')
+                        docker.image("${REGISTRY}/config-service").push('0.0.1')
+                        docker.image("${REGISTRY}/gateway-service").push('0.0.1')
+                        docker.image("${REGISTRY}/consul-vault-service").push('0.0.1')
                     }
                 }
             }
         }
 
-    stage('Deploy to Minikube') {
-               steps {
-                   script {
+        stage('Deploy to Minikube') {
+            steps {
+                script {
+                    withEnv(["KUBECONFIG=/root/.kube/config"]) { // Set KUBECONFIG environment variable
                         sh 'kubectl config use-context minikube'
-
                         sh 'kubectl apply -f Springboot-k8s-main/'
-
                         sh '''
-                           kubectl rollout status deployment/cloud-geteway-app
-                           kubectl rollout status deployment/cloud-config-service-app
-                           kubectl rollout status deployment/customer-service-app
-                           kubectl rollout status deployment/order-service-app
-                           kubectl rollout status statefulset/consul
-                       '''
-                   }
-               }
-           }
-       }
-
+                            kubectl rollout status deployment/cloud-gateway-app
+                            kubectl rollout status deployment/cloud-config-service-app
+                            kubectl rollout status deployment/customer-service-app
+                            kubectl rollout status deployment/order-service-app
+                            kubectl rollout status statefulset/consul
+                        '''
+                    }
+                }
+            }
+        }
     }
 
     post {
