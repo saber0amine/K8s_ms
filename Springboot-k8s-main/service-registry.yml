@@ -35,14 +35,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8500
-  volumeClaimTemplates:
-    - metadata:
-        name: consul-data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 1Gi
 ---
 
 apiVersion: v1
