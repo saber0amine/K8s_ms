@@ -48,9 +48,11 @@ pipeline {
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
                             pwd
                             ls
+                             kubectl delete -f Springboot-k8s-main/service-registry.yml
                              kubectl apply -f Springboot-k8s-main/service-registry.yml
                              sleep 10s
                              kubectl logs consul-0
+
                             '''
                         }
                     }
