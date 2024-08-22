@@ -42,7 +42,7 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    withEnv(["KUBECONFIG=/root/.kube/config"]) { // Set KUBECONFIG environment variable
+                    withEnv(["KUBECONFIG=/root/.kube/config"]) {
                         sh 'kubectl config use-context minikube'
                         sh 'kubectl apply -f Springboot-k8s-main/'
                         sh '''
