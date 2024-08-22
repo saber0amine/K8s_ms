@@ -44,7 +44,7 @@ pipeline {
 
                          steps {
                             script {
-   withKubeConfig([credentialsId: 'k8s_minikube', serverUrl: 'https://192.168.49.2:8443']) {
+   withKubeConfig([credentialsId: 'minikube_configFile', serverUrl: 'https://192.168.49.2:8443']) {
                 sh "kubectl apply -f Springboot-k8s-main/"
             }                }
             }
