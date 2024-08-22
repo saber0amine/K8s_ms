@@ -16,7 +16,7 @@ pipeline {
                         docker.build("${REGISTRY}/inventory-service", "inventory-service/")
                         docker.build("${REGISTRY}/order-service", "order-service/")
                         docker.build("${REGISTRY}/config-service", "config-service/")
-                        docker.build("${REGISTRY}/gateway-service", "gateway-service/") // Fixed typo
+                        docker.build("${REGISTRY}/geteway-service", "geteway-service/") // Fixed typo
                         docker.build("${REGISTRY}/consul-vault-service", "service-vault-consulCoonfig/")
                     }
                 }
@@ -32,7 +32,7 @@ pipeline {
                         docker.image("${REGISTRY}/inventory-service").push('0.0.1')
                         docker.image("${REGISTRY}/order-service").push('0.0.1')
                         docker.image("${REGISTRY}/config-service").push('0.0.1')
-                        docker.image("${REGISTRY}/gateway-service").push('0.0.1')
+                        docker.image("${REGISTRY}/geteway-service").push('0.0.1')
                         docker.image("${REGISTRY}/consul-vault-service").push('0.0.1')
                     }
                 }

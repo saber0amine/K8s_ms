@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dev</groupId>
-	<artifactId>gateway-service</artifactId>
+	<artifactId>geteway-service</artifactId>
 	<version>0.0.1</version>
 	<name>geteway-service</name>
 	<description>geteway-service</description>
