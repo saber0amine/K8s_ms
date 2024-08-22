@@ -3,6 +3,7 @@
 Config Service : Config Server  (Spring cloude) || Consul Discovry (Hashicorp) || Actuator
 Giteway  : Spring_cloud_giteway ||Consul Discovery ||actuator
 Services : Cosnul Dicovery || Config client (spring cloud) || actuator || spring web , jpa , rest jpa , lombok , devtools 
+Cosnul_vault : Consuil configuration || vault config || actuator || and other like jpa (not nedeed) sprin web ect..
 
 
 Microservices , Securite des system distribuee (keyclaok Oauth2 ect ) ,

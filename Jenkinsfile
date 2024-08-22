@@ -43,12 +43,14 @@ pipeline {
             steps {
                 script {
                     withKubeConfig([credentialsId: 'minikube_configFile', serverUrl: 'https://192.168.49.2:8443']) {
-
+                        withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'REGISTRY', passwordVariable: 'REGISTRY_CREDENTIAL')]) {
+                        sh "docker login -u ${REGISTRY} -p ${REGISTRY_CREDENTIAL}"
                          sh '''
                          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                           install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
                           kubectl apply -f Springboot-k8s-main/
                          '''
+                           }
                     }
                 }
             }
