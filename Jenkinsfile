@@ -49,6 +49,8 @@ pipeline {
                             pwd
                             ls
                              kubectl apply -f Springboot-k8s-main/service-registry.yml
+                             sleep 10s
+                             kubectl logs consul-0
                             '''
                         }
                     }
