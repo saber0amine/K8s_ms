@@ -1,23 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: $Title$
-  labels:
-    app: $Title$
+  name: hello-node
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: $Title$
+      app: hello-node
   template:
     metadata:
-      name: $Title$
       labels:
-        app: $Title$
+        app: hello-node
     spec:
       containers:
-        - name: $Title$
-          image: $Image$
-          imagePullPolicy: IfNotPresent
-      restartPolicy: Always
-      $END$
+        - name: hello-node
+          image: gcr.io/google-samples/hello-app:1.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-node
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: hello-node
