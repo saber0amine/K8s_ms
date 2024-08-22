@@ -44,7 +44,7 @@ pipeline {
                         agent {
                             docker {
                                 image 'gcr.io/k8s-minikube/kicbase:v0.0.44'
-                                args '-v /root/.kube:/root/.kube'  /
+                                args '-v /root/.kube:/root/.kube'
                             }
                         }
                          steps {
