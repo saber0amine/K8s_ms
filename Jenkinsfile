@@ -16,7 +16,7 @@ pipeline {
                         docker.build("${REGISTRY}/inventory-service", "inventory-service/")
                         docker.build("${REGISTRY}/order-service", "order-service/")
                         docker.build("${REGISTRY}/config-service", "config-service/")
-                        docker.build("${REGISTRY}/geteway-service", "geteway-service/") // Fixed typo
+                        docker.build("${REGISTRY}/geteway-service", "geteway-service/")
                         docker.build("${REGISTRY}/consul-vault-service", "service-vault-consulCoonfig/")
                     }
                 }
