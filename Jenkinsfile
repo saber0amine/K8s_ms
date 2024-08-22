@@ -41,16 +41,12 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-                        agent {
-                            docker {
-                                image 'gcr.io/k8s-minikube/kicbase:v0.0.44'
-                                args '-v /root/.kube:/root/.kube'
-                            }
-                        }
+
                          steps {
                             script {
-                         sh "kubectl apply -f Springboot-k8s-main/"
-                }
+   withKubeConfig([credentialsId: 'k8s-minikube', serverUrl: 'https://192.168.49.2:8443']) {
+                sh "kubectl apply -f Springboot-k8s-main/"
+            }                }
             }
         }
     }
