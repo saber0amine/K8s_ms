@@ -43,14 +43,11 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-              
 
-                    sh "kubectl apply -f Springboot-k8s-main/customer-service.yml"
-                    sh "kubectl apply -f Springboot-k8s-main/inventroy-service.yaml"
-                    sh "kubectl apply -f Springboot-k8s-main/order-service.yml"
-                    sh "kubectl apply -f Springboot-k8s-main/config-server.yml"
-                    sh "kubectl apply -f Springboot-k8s-main/cloud-gateway.yml"
-                    sh "kubectl apply -f Springboot-k8s-main/service-registry.yml"
+                    withEnv(["KUBECONFIG=/root/.kube/config"]) {
+                        sh "kubectl apply -f Springboot-k8s-main/"
+
+                }
                 }
             }
         }
