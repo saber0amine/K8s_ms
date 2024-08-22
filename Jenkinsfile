@@ -42,16 +42,8 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    withEnv(["KUBECONFIG=/root/.kube/config"]) {
-                        sh 'kubectl config use-context minikube'
-                        sh 'kubectl apply -f Springboot-k8s-main/'
-                        sh '''
-                            kubectl rollout status deployment/cloud-gateway-app
-                            kubectl rollout status deployment/cloud-config-service-app
-                            kubectl rollout status deployment/customer-service-app
-                            kubectl rollout status deployment/order-service-app
-                            kubectl rollout status statefulset/consul
-                        '''
+                    withKubeConfig([credentialsId: 'minikube_configFile', serverUrl: 'https://192.168.49.2:8443']) {
+                         sh 'kubectl apply -f Springboot-k8s-main/'
                     }
                 }
             }
