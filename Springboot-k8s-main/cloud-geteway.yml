@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloud-gateway-app
+  name: cloud-geteway-app
   labels:
-    app: cloud-gateway-app
+    app: cloud-geteway-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cloud-gateway-app
+      app: cloud-geteway-app
   template:
     metadata:
       labels:
-        app: cloud-gateway-app
+        app: cloud-geteway-app
     spec:
       containers:
-        - name: cloud-gateway-app
-          image: aminesbaer/gateway-service:0.0.1
+        - name: cloud-geteway-app
+          image: aminesbaer/geteway-service:0.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 9999
@@ -25,7 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cloud-gateway-svc
+  name: cloud-geteway-svc
 spec:
   type: LoadBalancer
   ports:
@@ -33,4 +33,4 @@ spec:
       targetPort: 9999
       protocol: TCP
   selector:
-    app: cloud-gateway-app
+    app: cloud-geteway-app
