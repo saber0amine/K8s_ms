@@ -49,6 +49,8 @@ pipeline {
                             pwd
                             ls
                             kubectl get pods
+                            kubectl delete -f Springboot-k8s-main/
+                            kubectl get pods
                             kubectl apply -f Springboot-k8s-main/service-registry.yml
                             kubectl apply -f Springboot-k8s-main/config-server.yml
                             kubectl apply -f Springboot-k8s-main/geteway-service.yml
