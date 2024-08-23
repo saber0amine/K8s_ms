@@ -48,9 +48,8 @@ pipeline {
                             sh '''
                             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-                            kubectl apply -f Springboot-k8s-main/cloud-geteway.yml
-                            kubectl delete -f Springboot-k8s-main/order-service.yml
-                            kubectl apply -f Springboot-k8s-main/order-service.yml
+
+                            kubectl apply -f Springboot-k8s-main/
 
 
 
