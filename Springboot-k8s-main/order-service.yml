@@ -14,6 +14,13 @@ spec:
       labels:
         app: order-service-app
     spec:
+      initContainers:
+        - name: wait-for-services
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS customer-service-svc:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
+        - name: wait-for-inventory
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS inventory-service-svc:80/actuator/health; do echo "Waiting for inventory service"; sleep 5; done']
       containers:
       - name: order-service-app
         image: aminesaber/order-service:0.0.1

@@ -14,12 +14,22 @@ spec:
       labels:
         app: cloud-geteway-app
     spec:
+      initContainers:
+        - name: wait-for-services
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS cloud-config-service-svc:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
       containers:
         - name: cloud-geteway-app
           image: aminesaber/geteway-service:0.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 9999
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9999
+            initialDelaySeconds: 10
+            periodSeconds: 5
 
 ---
 apiVersion: v1

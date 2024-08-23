@@ -14,6 +14,10 @@ spec:
       labels:
         app: customer-service-app
     spec:
+      initContainers:
+        - name: wait-for-services
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS cloud-geteway-svc:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
       containers:
         - name: customer-service-app
           image: aminesaber/customer-service:0.0.1

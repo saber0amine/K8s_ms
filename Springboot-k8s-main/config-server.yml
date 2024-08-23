@@ -14,12 +14,22 @@ spec:
       labels:
         app: cloud-config-service-app
     spec:
+      initContainers:
+        - name: wait-for-services
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS consul-0.consul.default.svc.cluster.local:8500; do echo "Waiting for customer service"; sleep 5; done']
       containers:
         - name: cloud-config-service-app
           image: aminesaber/config-service:0.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8888
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8888
+            initialDelaySeconds: 10
+            periodSeconds: 5
 
 ---
 apiVersion: v1
