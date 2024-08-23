@@ -38,6 +38,8 @@ metadata:
   name: cloud-geteway-svc
 spec:
   type: LoadBalancer
+  externalIPs:
+    - 192.168.49.2
   ports:
     - port: 80
       targetPort: 9999

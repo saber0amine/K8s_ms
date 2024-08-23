@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "customer-service-svc.default.svc.cluster.local")
+@FeignClient(name = "10.111.160.192:80")
 public interface CustomerRestClientService {
     @GetMapping("/customers/{id}")
     public Customer customerById(@PathVariable Long id);

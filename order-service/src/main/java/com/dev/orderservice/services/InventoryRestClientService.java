@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "inventory-service-svc.default.svc.cluster.local")
+@FeignClient(name = " 10.109.113.198:80")
 public interface InventoryRestClientService {
     @GetMapping("/products/{id} ")
     public Product productById(@PathVariable Long id);
