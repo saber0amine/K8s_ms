@@ -17,7 +17,7 @@ spec:
       initContainers:
         - name: wait-for-services
           image: appropriate/curl
-          command: ['sh', '-c', 'until curl -sS cloud-config-service-svc:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
+          command: ['sh', '-c', 'until curl -sS config-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
       containers:
         - name: cloud-geteway-app
           image: aminesaber/geteway-service:0.0.1
