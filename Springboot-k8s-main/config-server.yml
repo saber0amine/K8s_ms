@@ -35,7 +35,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cloud-config-service-svc
+  name: config-service
 spec:
   ports:
     - targetPort: 8888
