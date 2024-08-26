@@ -15,7 +15,7 @@ pipeline {
 //                         docker.build("${REGISTRY}/customer-service:0.0.1", "customer-service/")
 //                         docker.build("${REGISTRY}/inventory-service:0.0.1", "inventory-service/")
 //                          docker.build("${REGISTRY}/config-service:0.0.1", "config-service/")
-                          docker.build("${REGISTRY}/order-service:0.0.1", "order-service/")
+//                                          docker.build("${REGISTRY}/order-service:0.0.1", "order-service/")
                          docker.build("${REGISTRY}/geteway-service:0.0.1", "geteway-service/")
 
 
@@ -34,8 +34,8 @@ pipeline {
 //
 //                         docker.image("${REGISTRY}/config-service:0.0.1").push()
 //
-                           docker.image("${REGISTRY}/order-service:0.0.1").push()
-                     docker.image("${REGISTRY}/geteway-service:0.0.1").push()
+//                         docker.image("${REGISTRY}/order-service:0.0.1").push()
+                                         docker.image("${REGISTRY}/geteway-service:0.0.1").push()
                     }
                 }
             }
@@ -52,8 +52,6 @@ pipeline {
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
                             kubectl delete -f Springboot-k8s-main/cloud-geteway.yml
                             kubectl apply -f Springboot-k8s-main/cloud-geteway.yml
-                             kubectl delete -f Springboot-k8s-main/order-service.yml
-                             kubectl apply -f Springboot-k8s-main/order-service.yml
 
 
 
