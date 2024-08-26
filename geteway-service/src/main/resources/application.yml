@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: customer-service
+          uri: http://10.244.0.131:8081
+          predicates:
+            - Path=/customers/**
+        - id: inventory-service
+          uri: http://10.244.0.133:8082
+          predicates:
+            - Path=/products/**
+        - id: order-service
+          uri: http://10.244.0.132:8083
+          predicates:
+            - Path=/orders/**
