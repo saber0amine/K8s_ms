@@ -1,23 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Title
-  labels:
-    app: Title
+    name: web-client-app
+    labels:
+        app: web-client-app
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: Title
-  template:
-    metadata:
-      name: Title
-      labels:
-        app: Title
-    spec:
-      containers:
-        - name: Title
-          image: Image
-          imagePullPolicy: IfNotPresent
-      restartPolicy: Always
-      
+    replicas: 1
+    selector:
+      matchLabels:
+        app: web-client-app
+    template:
+        metadata:
+          labels:
+            app: web-client-app
+        spec:
+          initContainers:
+            - name: wait-for-services
+              image: appropriate/curl
+              command: ['sh', '-c', 'until curl -sS config-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
+          containers:
+            - name: web-client
+              image: aminesaber/web-client:0.0.1
+              imagePullPolicy: Always
+              ports:
+                  - containerPort: 4200
+
+---
+apiVersion: v1
+kined: Service
+metadata:
+    name: web-client-service
+spec:
+    type: LoadBalancer
+    externalIPs:
+      - 192.168.49.2
+    ports:
+      port: 80
+      targetPort: 4200
+      protocol: TCP
+    selector:
+      app: web-client-app
