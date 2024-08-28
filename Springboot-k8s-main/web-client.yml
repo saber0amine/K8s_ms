@@ -27,7 +27,7 @@ spec:
 
 ---
 apiVersion: v1
-kined: Service
+kind: Service
 metadata:
     name: web-client-service
 spec:
@@ -35,8 +35,8 @@ spec:
     externalIPs:
       - 192.168.49.2
     ports:
-      port: 80
-      targetPort: 4200
-      protocol: TCP
+      - port: 80
+        targetPort: 4200
+        protocol: TCP
     selector:
       app: web-client-app
