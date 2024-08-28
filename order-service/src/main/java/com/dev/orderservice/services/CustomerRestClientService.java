@@ -8,10 +8,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+//, url = "http://10.244.0.131:8081"
+
 @FeignClient(name = "customer-service" , url = "http://10.244.0.131:8081")
 public interface CustomerRestClientService {
-    @GetMapping("/customers/{id}")
+//    @GetMapping("/customers/{id}")
+//    public Customer customerById(@PathVariable Long id);
+//    @GetMapping("/customers")
+//    public PagedModel<Customer> allCustomers();
+
+    @GetMapping("/customers/{id}?projection=fullCustomer")
     public Customer customerById(@PathVariable Long id);
-    @GetMapping("/customers")
+    @GetMapping("/customers?projection=fullCustomer")
     public PagedModel<Customer> allCustomers();
 }
