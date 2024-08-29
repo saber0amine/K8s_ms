@@ -53,6 +53,6 @@ spec:
     - port: 80
       targetPort: 8070
       protocol: TCP
-      nodePort: 33000
+      nodePort: 31500
   selector:
     app: cadvisor
