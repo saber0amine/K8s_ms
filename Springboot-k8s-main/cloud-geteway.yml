@@ -44,5 +44,6 @@ spec:
     - port: 80
       targetPort: 9999
       protocol: TCP
+      nodePort: 31769
   selector:
     app: cloud-geteway-app
