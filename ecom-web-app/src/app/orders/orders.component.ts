@@ -15,7 +15,7 @@ export class OrdersComponent implements OnInit {
   }
 //http://localhost:9999/order-service/orders/search/byCustomerId?projection=fullOrder&customerId
   ngOnInit(): void {
-    this.http.get("http://localhost:31769/orders/search/byCustomerId?projection=fullOrder&customerId="+this.customerId)
+    this.http.get("/api/orders/search/byCustomerId?projection=fullOrder&customerId="+this.customerId)
       .subscribe({
         next : (data)=>{
           this.orders=data;
