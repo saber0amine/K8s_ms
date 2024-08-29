@@ -23,7 +23,7 @@ spec:
               image: aminesaber/web-client:0.0.1
               imagePullPolicy: Always
               ports:
-                  - containerPort: 4200
+                  - containerPort: 80
 
 ---
 apiVersion: v1
