@@ -11,7 +11,7 @@ export class ProductsComponent implements OnInit {
   constructor(private http:HttpClient) { }
 //http://localhost:9999/inventory-service/products?projection=fullProduct"
   ngOnInit(): void {
-    this.http.get("http://192.168.49.2:31769/products?projection=fullProduct")
+    this.http.get("http://geteway-service:31769/products?projection=fullProduct")
       .subscribe({
       next : (data)=>{
         this.products=data;
