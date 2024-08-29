@@ -12,7 +12,7 @@ export class CustomersComponent implements OnInit {
   constructor(private http:HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    this.http.get("http://10.244.0.193:9999/customers")
+    this.http.get("http://10.244.0.131:8081/customers?projection=fullCustomer")
       .subscribe({
         next : (data)=>{
           this.customers=data;
