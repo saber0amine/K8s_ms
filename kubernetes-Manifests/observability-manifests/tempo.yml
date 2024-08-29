@@ -24,15 +24,15 @@ spec:
           command: [ "-config.file=/etc/tempo.yaml" ]
           volumeMounts:
             - mountPath: /etc/tempo.yml
-              name: tempoConfig
+              name: tempo-config
             - mountPath: /tmp/tempo
-              name: tempoData
+              name: tempo-data
       volumes:
-        - name: tempoConfig
+        - name: tempo-config
           hostPath:
             path: ./docker/tempo.yml
             type: File
-        - name: tempoData
+        - name: tempo-data
           hostPath:
             path: ./docker/tempo-data
             type: Directory

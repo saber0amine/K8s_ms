@@ -14,10 +14,6 @@ spec:
       labels:
         app: prometheus
     spec:
-      initContainers:
-        - name: wait-for-services
-          image: appropriate/curl
-          command: ['sh', '-c', 'until curl -sS config-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
       containers:
         - name: prometheus
           image:  prom/prometheus
@@ -26,9 +22,9 @@ spec:
             - containerPort: 9090
           volumeMounts:
             - mountPath: /etc/prometheus
-              name: promoConfig
+              name: promo-config
       volumes:
-        - name: promoConfig
+        - name: promo-config
           hostPath:
             path: ./docker/prometheus
             type: Directory

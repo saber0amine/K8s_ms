@@ -14,10 +14,6 @@ spec:
       labels:
         app: cadvisor
     spec:
-      initContainers:
-        - name: wait-for-services
-          image: appropriate/curl
-          command: ['sh', '-c', 'until curl -sS config-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
       containers:
         - name: cadvisor
           image: gcr.io/cadvisor/cadvisor:latest
@@ -26,13 +22,13 @@ spec:
             - containerPort: 8070
           volumeMounts:
             - mountPath: /rootfs
-              name: rootfs
+              name: root
             - mountPath: /var/run
               name: var-run
             - mountPath: /sys
-              name: sys
+              name: sys-host-dir
       volumes:
-        - name: rootfs
+        - name: root
           hostPath:
             path: /
             type: Directory
@@ -40,11 +36,15 @@ spec:
           hostPath:
             path : /var/run
             type: Directory
+        - name: sys-host-dir
+          hostPath:
+            path: /sys
+            type: Directory
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: geteway-service
+  name: cadvisor-service
 spec:
   type: LoadBalancer
   externalIPs:
