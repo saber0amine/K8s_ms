@@ -36,7 +36,7 @@ spec:
       - 192.168.49.2
     ports:
       - port: 80
-        targetPort: 4200
+        targetPort: 80
         protocol: TCP
     selector:
       app: web-client-app
