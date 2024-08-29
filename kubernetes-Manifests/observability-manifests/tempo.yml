@@ -44,9 +44,11 @@ metadata:
   name: tempo-service
 spec:
   ports:
-    - targetPort: 8081
+    - name: tempo
+      targetPort: 8081
       port: 8081
-    - targetPort: 9411
+    - name: zipkin
+      targetPort: 9411
       port: 9411
   selector:
     app: tempo-traces
