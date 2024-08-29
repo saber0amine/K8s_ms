@@ -25,7 +25,7 @@ public class OrderRestController {
         this.inventoryRestClientService = inventoryRestClientService;
     }
 
-    @GetMapping("/fullOrder/{id}")
+    @GetMapping("/orders/fullOrder/{id}")
     public Order getOrder(@PathVariable Long id){
         Order order=orderRepository.findById(id).get();
         Customer customer=customerRestClientService.customerById(order.getCustomerId());
