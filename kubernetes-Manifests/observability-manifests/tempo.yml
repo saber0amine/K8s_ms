@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tempo-traces
+  labels:
+    app: tempo-traces
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tempo-traces
+  template:
+    metadata:
+      labels:
+        app: tempo-traces
+    spec:
+      containers:
+        - name: tempo-traces
+          image: grafana/tempo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3200
+            - containerPort: 9411
+          command: [ "-config.file=/etc/tempo.yaml" ]
+          volumeMounts:
+            - mountPath: /etc/tempo.yml
+              name: tempoConfig
+            - mountPath: /tmp/tempo
+              name: tempoData
+      volumes:
+        - name: tempoConfig
+          hostPath:
+            path: ./docker/tempo.yml
+            type: File
+        - name: tempoData
+          hostPath:
+            path: ./docker/tempo-data
+            type: Directory
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tempo-service
+spec:
+  ports:
+    - targetPort: 8081
+      port: 8081
+    - targetPort: 9411
+      port: 9411
+  selector:
+    app: tempo-traces

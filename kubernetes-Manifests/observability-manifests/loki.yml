@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loki-logs
+  labels:
+    app: loki-logs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loki-logs
+  template:
+    metadata:
+      labels:
+        app: loki-logs
+    spec:
+      containers:
+        - name: loki-logs
+          image: grafana/loki:main
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3100
+          command: [ "-config.file=/etc/loki/local-config.yaml" ]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loki-service
+spec:
+  ports:
+    - targetPort: 3100
+      port: 80
+  selector:
+    app: loki-logs

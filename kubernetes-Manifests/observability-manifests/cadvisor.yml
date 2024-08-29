@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cadvisor
+  labels:
+    app: cadvisor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cadvisor
+  template:
+    metadata:
+      labels:
+        app: cadvisor
+    spec:
+      initContainers:
+        - name: wait-for-services
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS config-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
+      containers:
+        - name: cadvisor
+          image: gcr.io/cadvisor/cadvisor:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8070
+          volumeMounts:
+            - mountPath: /rootfs
+              name: rootfs
+            - mountPath: /var/run
+              name: var-run
+            - mountPath: /sys
+              name: sys
+      volumes:
+        - name: rootfs
+          hostPath:
+            path: /
+            type: Directory
+        - name: var-run
+          hostPath:
+            path : /var/run
+            type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: geteway-service
+spec:
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.49.2
+  ports:
+    - port: 80
+      targetPort: 8070
+      protocol: TCP
+      nodePort: 33000
+  selector:
+    app: cadvisor

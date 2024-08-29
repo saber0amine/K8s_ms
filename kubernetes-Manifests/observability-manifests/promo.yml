@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      initContainers:
+        - name: wait-for-services
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS config-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
+      containers:
+        - name: prometheus
+          image:  prom/prometheus
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - mountPath: /etc/prometheus
+              name: promoConfig
+      volumes:
+        - name: promoConfig
+          hostPath:
+            path: ./docker/prometheus
+            type: Directory
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+spec:
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.49.2
+  ports:
+    - port: 80
+      targetPort: 9090
+      protocol: TCP
+      nodePort: 32000
+  selector:
+    app: prometheus

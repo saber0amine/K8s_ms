@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      initContainers:
+        - name: wait-for-services
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS config-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
+      containers:
+        - name: grafana
+          image: grafana/grafana
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: GF_SECURITY_ADMIN_USER
+              value: admin
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: admin
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: datasources
+      volumes:
+        - name: datasources
+          hostPath:
+            path: ./docker/grafana
+            type: Directory
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-service
+spec:
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.49.2
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+      nodePort: 31000
+  selector:
+    app: grafana
