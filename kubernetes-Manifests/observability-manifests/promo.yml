@@ -27,7 +27,7 @@ spec:
         - name: promo-config
           hostPath:
             path: ./docker/prometheus
-            type: Directory
+
 
 ---
 apiVersion: v1

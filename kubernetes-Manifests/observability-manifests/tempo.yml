@@ -31,11 +31,9 @@ spec:
         - name: tempo-config
           hostPath:
             path: ./docker/tempo.yml
-            type: File
         - name: tempo-data
           hostPath:
             path: ./docker/tempo-data
-            type: Directory
 
 ---
 apiVersion: v1

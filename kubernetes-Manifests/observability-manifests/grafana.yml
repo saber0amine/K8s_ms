@@ -32,7 +32,7 @@ spec:
         - name: datasources
           hostPath:
             path: ./docker/grafana
-            type: Directory
+
 
 
 ---
