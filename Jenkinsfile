@@ -34,7 +34,7 @@ pipeline {
                         sh "docker login -u ${REGISTRY} -p ${REGISTRY_CREDENTIAL}"
 //                         docker.image("${REGISTRY}/customer-service:0.0.1").push()
 //                         docker.image("${REGISTRY}/inventory-service:0.0.1").push()
-                        docker.image("${REGISTRY}/order-service:0.0.1").push()
+                       // docker.image("${REGISTRY}/order-service:0.0.1").push()
 
                         //docker.image("${REGISTRY}/config-service:0.0.1").push()
 //                           docker.image("${REGISTRY}/geteway-service:0.0.1").push()
@@ -54,10 +54,7 @@ pipeline {
                             sh '''
                             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-                            pwd
-                            ls
-//                             kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
-//                             kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
+
                             kubectl delete -f  kubernetes-Manifests/observability-manifests/
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/
 
