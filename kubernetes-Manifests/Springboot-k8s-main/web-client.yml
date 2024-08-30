@@ -24,6 +24,13 @@ spec:
               imagePullPolicy: Always
               ports:
                   - containerPort: 80
+              volumeMounts:
+                - mountPath: /etc/nginx/conf.d
+                  name: nginx-config
+          volumes:
+              - name: nginx-config
+                hostPath:
+                  path: default.conf
 
 ---
 apiVersion: v1
