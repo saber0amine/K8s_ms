@@ -1,3 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+    - job_name: 'customer-service'
+      metrics_path: '/actuator/prometheus'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['customer-service:8081']
+          labels:
+            application: 'My Customer App Service Application'
+
+    - job_name: 'inventory-service'
+      metrics_path: '/actuator/prometheus'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['inventory-service:8082']
+          labels:
+            application: 'My Inventory Service Application'
+
+    - job_name: 'order-service'
+      metrics_path: '/actuator/prometheus'
+      scrape_interval: 5s
+      static_configs:
+        - targets: ['order-service:8083']
+          labels:
+            application: 'My Order Service Application'
+
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,13 +56,15 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 9090
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
           volumeMounts:
-            - mountPath: /etc/prometheus
-              name: promo-config
+            - name: config
+              mountPath: /etc/prometheus
       volumes:
-        - name: promo-config
-          hostPath:
-            path: /var/jenkins_home/workspace/k8s_microservice/docker/prometheus
+        - name: config
+          configMap:
+            name: prometheus-config
 
 
 ---

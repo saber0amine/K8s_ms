@@ -1,3 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tempo-config
+data:
+  tempo.yaml: |
+    server:
+      http_listen_port: 3200
+    distributor:
+      receivers:
+        zipkin:        
+    storage:
+      trace:
+        backend: local
+        local:
+          path: /tmp/tempo/blocks
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,19 +39,15 @@ spec:
           ports:
             - containerPort: 3200
             - containerPort: 9411
-          command: [ "-config.file=/etc/tempo.yaml" ]
+          args:
+            - "-config.file=/etc/tempo/tempo.yaml"
           volumeMounts:
-            - mountPath: /etc/tempo.yml
-              name: tempo-config
-            - mountPath: /tmp/tempo
-              name: tempo-data
+            - name: config
+              mountPath: /etc/tempo
       volumes:
-        - name: tempo-config
-          hostPath:
-            path: /var/jenkins_home/workspace/k8s_microservice/docker/tempo.yml
-        - name: tempo-data
-          hostPath:
-            path: /var/jenkins_home/workspace/k8s_microservice/docker/tempo-data
+        - name: config
+          configMap:
+            name: tempo-config
 
 ---
 apiVersion: v1
