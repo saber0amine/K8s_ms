@@ -56,7 +56,7 @@ pipeline {
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
                             pwd
                             ls
-                            kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/
+                            kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/
                             kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/
