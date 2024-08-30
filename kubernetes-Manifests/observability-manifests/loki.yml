@@ -32,7 +32,6 @@ data:
       filesystem:
         directory: /tmp/loki/chunks
     limits_config:
-      enforce_metric_name: false
       reject_old_samples: true
       reject_old_samples_max_age: 168h
 
@@ -53,6 +52,16 @@ spec:
       labels:
         app: loki-logs
     spec:
+      initContainers:
+        - name: wait-for-services
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS customer-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
+        - name: wait-for-inventory
+          image: appropriate/curl
+          command: ['sh', '-c', 'until curl -sS inventory-service:80/actuator/health; do echo "Waiting for inventory service"; sleep 5; done']
+        - name: wait-for-order
+          image: appropriate/curl
+          command: [ 'sh', '-c', 'until curl -sS order-service:80/actuator/health; do echo "Waiting for inventory service"; sleep 5; done' ]
       containers:
         - name: loki-logs
           image: grafana/loki:main
