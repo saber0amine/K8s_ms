@@ -54,8 +54,8 @@ pipeline {
                             sh '''
                             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-                              kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
-                             kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
+                              kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/
+                             kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/
                             kubectl delete -f  kubernetes-Manifests/observability-manifests/tempo.yml
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/tempo.yml
                             kubectl delete -f  kubernetes-Manifests/observability-manifests/loki.yml
