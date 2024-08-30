@@ -60,8 +60,7 @@ pipeline {
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/tempo.yml
                             kubectl delete -f  kubernetes-Manifests/observability-manifests/loki.yml
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/loki.yml
-                              kubectl delete -f  kubernetes-Manifests/observability-manifests/promo.yml
-                       kubectl apply -f  kubernetes-Manifests/observability-manifests/promo.yml
+                             kubectl apply -f  kubernetes-Manifests/observability-manifests/promo.yml
 
                             '''
                         }
