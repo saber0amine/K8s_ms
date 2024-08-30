@@ -14,7 +14,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'REGISTRY', passwordVariable: 'REGISTRY_CREDENTIAL')]) {
 //                         docker.build("${REGISTRY}/customer-service:0.0.1", "customer-service/")
 //                         docker.build("${REGISTRY}/inventory-service:0.0.1", "inventory-service/")
-                          docker.build("${REGISTRY}/order-service:0.0.1", "order-service/")
+                      //    docker.build("${REGISTRY}/order-service:0.0.1", "order-service/")
                     //  docker.build("${REGISTRY}/config-service:0.0.1", "config-service/")
 
 //                       docker.build("${REGISTRY}/geteway-service:0.0.1", "geteway-service/")
@@ -56,8 +56,8 @@ pipeline {
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
                             pwd
                             ls
-                            kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
-                            kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
+//                             kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
+//                             kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
                             kubectl delete -f  kubernetes-Manifests/observability-manifests/
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/
 

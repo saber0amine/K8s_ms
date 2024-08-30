@@ -11,7 +11,7 @@ data:
       metrics_path: '/actuator/prometheus'
       scrape_interval: 5s
       static_configs:
-        - targets: ['customer-service:8081']
+        - targets: ['10.244.0.241:8081']
           labels:
             application: 'My Customer App Service Application'
 
@@ -19,7 +19,7 @@ data:
       metrics_path: '/actuator/prometheus'
       scrape_interval: 5s
       static_configs:
-        - targets: ['inventory-service:8082']
+        - targets: ['10.244.0.242:8082']
           labels:
             application: 'My Inventory Service Application'
 
@@ -27,7 +27,7 @@ data:
       metrics_path: '/actuator/prometheus'
       scrape_interval: 5s
       static_configs:
-        - targets: ['order-service:8083']
+        - targets: ['10.244.0.243:8083']
           labels:
             application: 'My Order Service Application'
 
@@ -54,6 +54,9 @@ spec:
         - name: prometheus
           image:  prom/prometheus
           imagePullPolicy: Always
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
           ports:
             - containerPort: 9090
           args:
