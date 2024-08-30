@@ -10,7 +10,7 @@ import java.util.List;
 
 //, url = "http://10.244.0.131:8081"
 
-@FeignClient(name = "customer-service" , url = "http://customer-service.default.svc.cluster.local:8081")
+@FeignClient(name = "customer-service" , url = "http://10.244.1.60:8081")
 public interface CustomerRestClientService {
 //    @GetMapping("/customers/{id}")
 //    public Customer customerById(@PathVariable Long id);
