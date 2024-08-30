@@ -31,7 +31,7 @@ spec:
       volumes:
         - name: datasources
           hostPath:
-            path: ./docker/grafana
+            path: /var/jenkins_home/workspace/k8s_microservice/docker/grafana
 
 
 

@@ -30,10 +30,10 @@ spec:
       volumes:
         - name: tempo-config
           hostPath:
-            path: ./docker/tempo.yml
+            path: /var/jenkins_home/workspace/k8s_microservice/docker/tempo.yml
         - name: tempo-data
           hostPath:
-            path: ./docker/tempo-data
+            path: /var/jenkins_home/workspace/k8s_microservice/docker/tempo-data
 
 ---
 apiVersion: v1
