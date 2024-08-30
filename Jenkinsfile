@@ -56,6 +56,12 @@ pipeline {
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
                             kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
                              kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
+                                   kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/customer-service.yml
+                                      kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/customer-service.yml
+                                            kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
+                                                                   kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
+                                                                               kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
+                                                                                                                                      kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
                             kubectl delete -f  kubernetes-Manifests/observability-manifests/promo.yml
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/promo.yml
 
