@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 //url = "http://10.244.0.133:8082" for kubernetes
-@FeignClient(name = "inventory-service" , url = "http://10.244.1.27:8082"  )
+@FeignClient(name = "inventory-service" , url = "http://inventory-service.default.svc.cluster.local:8082"  )
 public interface InventoryRestClientService {
 //    @GetMapping("/products/{id} ")
 //    public Product productById(@PathVariable Long id);
