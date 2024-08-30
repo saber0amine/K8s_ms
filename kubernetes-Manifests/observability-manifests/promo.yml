@@ -11,7 +11,7 @@ data:
         metrics_path: '/actuator/prometheus'
         scrape_interval: 5s
         static_configs:
-          - targets: ['http://customer-service.default.svc.cluster.local:8081']
+          - targets: ['http://customer-service:8081']
             labels:
               application: 'My Customer App Service Application'
     
@@ -19,7 +19,7 @@ data:
         metrics_path: '/actuator/prometheus'
         scrape_interval: 5s
         static_configs:
-          - targets: ['http://inventory-service.default.svc.cluster.local:8082']
+          - targets: ['http://inventory-service:8082']
             labels:
               application: 'My Inventory Service Application'
     
@@ -27,7 +27,7 @@ data:
         metrics_path: '/actuator/prometheus'
         scrape_interval: 5s
         static_configs:
-          - targets: ['http://order-service.default.svc.cluster.local:8083']
+          - targets: ['http://order-service:8083']
             labels:
               application: 'My Order Service Application'
 
