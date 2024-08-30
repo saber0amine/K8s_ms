@@ -27,7 +27,7 @@ data:
         metrics_path: '/actuator/prometheus'
         scrape_interval: 5s
         static_configs:
-          - targets: ['10.244.1.93:8083']
+          - targets: ['10.244.1.97:8083']
             labels:
               application: 'My Order Service Application'
 
