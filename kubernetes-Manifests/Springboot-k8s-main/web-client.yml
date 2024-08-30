@@ -25,12 +25,12 @@ spec:
               ports:
                   - containerPort: 80
               volumeMounts:
-                - mountPath: /etc/nginx/conf.d
+                - mountPath: /etc/nginx/conf.d/default.conf
                   name: nginx-config
           volumes:
               - name: nginx-config
                 hostPath:
-                  path: default.conf
+                  path: /var/jenkins_home/workspace/k8s_microservice/default.conf
 
 ---
 apiVersion: v1
