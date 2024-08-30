@@ -17,7 +17,7 @@ pipeline {
                          //docker.build("${REGISTRY}/order-service:0.0.1", "order-service/")
                     //  docker.build("${REGISTRY}/config-service:0.0.1", "config-service/")
 
-//                       docker.build("${REGISTRY}/geteway-service:0.0.1", "geteway-service/")
+                     docker.build("${REGISTRY}/geteway-service:0.0.1", "geteway-service/")
 //                          docker.build("${REGISTRY}/web-client:0.0.1", "ecom-web-app/")
 
 
@@ -37,7 +37,7 @@ pipeline {
                       // docker.image("${REGISTRY}/order-service:0.0.1").push()
 
                         //docker.image("${REGISTRY}/config-service:0.0.1").push()
-//                           docker.image("${REGISTRY}/geteway-service:0.0.1").push()
+                     docker.image("${REGISTRY}/geteway-service:0.0.1").push()
 //                           docker.image("${REGISTRY}/web-client:0.0.1").push()
 
                     }
@@ -54,8 +54,8 @@ pipeline {
                             sh '''
                             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-                              kubectl delete -f  kubernetes-Manifests/observability-manifests/promo.yml
-                              kubectl apply -f  kubernetes-Manifests/observability-manifests/promo.yml
+                               kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/cloud-geteway.yml
+                               kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/cloud-geteway.yml
 
 
 
