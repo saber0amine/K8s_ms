@@ -38,5 +38,5 @@ spec:
   selector:
     app:  order-service-app
   ports:
-  - port:  8083
+  - port:  80
     targetPort:  8083
