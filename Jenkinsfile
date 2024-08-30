@@ -58,7 +58,7 @@ pipeline {
                             ls
                             kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/
                             kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/
-                            kubectl apply -f  kubernetes-Manifests/observability-manifests/
+                            kubectl delete -f  kubernetes-Manifests/observability-manifests/
                             kubectl apply -f  kubernetes-Manifests/observability-manifests/
 
 
