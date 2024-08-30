@@ -56,7 +56,8 @@ pipeline {
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
                                kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/cloud-geteway.yml
                                kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/cloud-geteway.yml
-
+                            kubectl delete -f  kubernetes-Manifests/observability-manifests/grafana.yml
+                            kubectl apply -f  kubernetes-Manifests/observability-manifests/grafana.yml
 
 
 
