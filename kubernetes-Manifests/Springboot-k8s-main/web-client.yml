@@ -24,13 +24,13 @@ spec:
               imagePullPolicy: Always
               ports:
                   - containerPort: 80
-              volumeMounts:
-                - mountPath: /etc/nginx/conf.d/default.conf
-                  name: nginx-config
-          volumes:
-              - name: nginx-config
-                hostPath:
-                  path: /var/jenkins_home/workspace/k8s_microservice/default.conf
+#              volumeMounts:
+#                - mountPath: /etc/nginx/conf.d/default.conf
+#                  name: nginx-config
+#          volumes:
+#              - name: nginx-config
+#                hostPath:
+#                  path: /var/jenkins_home/workspace/k8s_microservice/default.conf
 
 ---
 apiVersion: v1

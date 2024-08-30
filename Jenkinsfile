@@ -32,9 +32,9 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'REGISTRY', passwordVariable: 'REGISTRY_CREDENTIAL')]) {
                         sh "docker login -u ${REGISTRY} -p ${REGISTRY_CREDENTIAL}"
-//                         docker.image("${REGISTRY}/customer-service:0.0.1").push()
-//                         docker.image("${REGISTRY}/inventory-service:0.0.1").push()
-                       // docker.image("${REGISTRY}/order-service:0.0.1").push()
+                        docker.image("${REGISTRY}/customer-service:0.0.1").push()
+                        docker.image("${REGISTRY}/inventory-service:0.0.1").push()
+                       docker.image("${REGISTRY}/order-service:0.0.1").push()
 
                         //docker.image("${REGISTRY}/config-service:0.0.1").push()
 //                           docker.image("${REGISTRY}/geteway-service:0.0.1").push()
