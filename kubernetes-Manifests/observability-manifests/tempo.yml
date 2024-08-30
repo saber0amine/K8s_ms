@@ -57,10 +57,10 @@ metadata:
 spec:
   ports:
     - name: tempo
-      targetPort: 8081
-      port: 8081
+      targetPort: 3200
+      port: 81
     - name: zipkin
       targetPort: 9411
-      port: 9411
+      port: 82
   selector:
     app: tempo-traces

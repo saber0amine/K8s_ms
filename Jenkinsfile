@@ -62,8 +62,8 @@ pipeline {
                                                                    kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
                                                                                kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
                                                                                                                                       kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
-                            kubectl delete -f  kubernetes-Manifests/observability-manifests/promo.yml
-                            kubectl apply -f  kubernetes-Manifests/observability-manifests/promo.yml
+                            kubectl delete -f  kubernetes-Manifests/observability-manifests/tempo.yml
+                            kubectl apply -f  kubernetes-Manifests/observability-manifests/tempo.yml
 
 
                             '''
