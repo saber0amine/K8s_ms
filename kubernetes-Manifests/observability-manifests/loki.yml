@@ -53,7 +53,7 @@ spec:
         app: loki-logs
     spec:
       initContainers:
-        - name: wait-for-services
+        - name: wait-for-customer
           image: appropriate/curl
           command: ['sh', '-c', 'until curl -sS customer-service:80/actuator/health; do echo "Waiting for customer service"; sleep 5; done']
         - name: wait-for-inventory
