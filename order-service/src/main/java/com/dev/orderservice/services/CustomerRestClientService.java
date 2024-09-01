@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-//, url = "http://10.244.0.131:8081"
+//, url = "http://10.244.1.101:8081"
 
-@FeignClient(name = "customer-service" , url = "http://10.244.1.101:8081")
+@FeignClient(name = "customer-service" )
 public interface CustomerRestClientService {
 //    @GetMapping("/customers/{id}")
 //    public Customer customerById(@PathVariable Long id);
