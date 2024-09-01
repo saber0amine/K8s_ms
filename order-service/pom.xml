@@ -86,10 +86,12 @@
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-kubernetes -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-kubernetes</artifactId>
+            <artifactId>spring-cloud-kubernetes</artifactId>
+            <version>3.1.3</version>
+            <type>pom</type>
         </dependency>
 
         <!-- ********************************************MONITORING SERVICES********************************************************** -->
