@@ -3,6 +3,8 @@ spring:
     kubernetes:
       discovery:
         enabled: true
+      reload:
+        enabled: true
 
 ribbon:
   kubernetes:
