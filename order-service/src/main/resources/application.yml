@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    kubernetes:
+      discovery:
+        enabled: true
+
+ribbon:
+  kubernetes:
+    enabled: true
+
+
+logging:
+  level:
+    com.netflix.discovery: DEBUG
+    org.springframework.cloud.openfeign: DEBUG
