@@ -86,10 +86,21 @@
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
 
+
+        <!-- ********************************************K8s CLIENT ********************************************************** -->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-kubernetes-client-all</artifactId>
         </dependency>
+
+        <!-- ********************************************Keyckloak RESSOURCE SERVER********************************************************** -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
 
         <!-- ********************************************MONITORING SERVICES********************************************************** -->
 
