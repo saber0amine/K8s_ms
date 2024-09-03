@@ -11,6 +11,7 @@ data:
   KC_HOSTNAME_STRICT_HTTPS: "false"
   KC_HTTP_ENABLED: "true"
   KC_PROXY: "edge"
+  KEYCLOAK_ADMIN: "saber"
 ---
 apiVersion: v1
 kind: Secret
@@ -19,6 +20,7 @@ metadata:
 type: Opaque
 stringData:
   KC_DB_PASSWORD: "saber"
+  KEYCLOAK_ADMIN_PASSWORD: "saber"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -48,6 +50,7 @@ spec:
           env:
             - name: KC_DB
               value: postgres
+
 ---
 apiVersion: v1
 kind: Service
@@ -64,5 +67,3 @@ spec:
       port: 8095
       targetPort: 8080
       nodePort: 31095
-
-
