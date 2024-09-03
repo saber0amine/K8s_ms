@@ -51,6 +51,7 @@ pipeline {
                             sh '''
                             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+                            kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/postgres-service.yml
 
                               kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/keycloak-service.yml
                              kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/postgres-service.yml
