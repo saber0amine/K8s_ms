@@ -23,9 +23,13 @@ kind: Service
 metadata:
   name: adminer
 spec:
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.49.2
   selector:
     app: adminer
   ports:
     - protocol: TCP
       port: 8085
       targetPort: 8080
+      nodePort: 31085
