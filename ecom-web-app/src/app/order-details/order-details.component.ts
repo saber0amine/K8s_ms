@@ -15,6 +15,7 @@ export class OrderDetailsComponent implements OnInit {
     this.orderId=route.snapshot.params['orderId'];
   }
 //http://localhost:9999/order-service/fullOrder/
+  ///api/orders/fullOrder/
   ngOnInit(): void {
     this.http.get("/api/orders/fullOrder/"+this.orderId)
       .subscribe({

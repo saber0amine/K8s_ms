@@ -14,6 +14,7 @@ export class OrdersComponent implements OnInit {
     this.customerId=route.snapshot.params['customerId'];
   }
 //http://localhost:9999/order-service/orders/search/byCustomerId?projection=fullOrder&customerId
+  ///api/orders/search/byCustomerId?projection=fullOrder&customerId=
   ngOnInit(): void {
     this.http.get("/api/orders/search/byCustomerId?projection=fullOrder&customerId="+this.customerId)
       .subscribe({

@@ -18,7 +18,7 @@ pipeline {
                       docker.build("${REGISTRY}/config-service:0.0.1", "config-service/")
 
                          docker.build("${REGISTRY}/geteway-service:0.0.1", "geteway-service/")
-//                          docker.build("${REGISTRY}/web-client:0.0.1", "ecom-web-app/")
+                      docker.build("${REGISTRY}/web-client:0.0.1", "ecom-web-app/")
 
 
 
@@ -38,7 +38,7 @@ pipeline {
 
                          docker.image("${REGISTRY}/config-service:0.0.1").push()
                         docker.image("${REGISTRY}/geteway-service:0.0.1").push()
-//                           docker.image("${REGISTRY}/web-client:0.0.1").push()
+                    docker.image("${REGISTRY}/web-client:0.0.1").push()
 
                     }
                 }
@@ -62,7 +62,8 @@ pipeline {
                           kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/customer-service.yml
                           kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
                           kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
-
+                           kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/web-clien.yml
+                           kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
 
 
 

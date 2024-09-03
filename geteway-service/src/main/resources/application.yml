@@ -14,3 +14,7 @@ spring:
               - POST
               - PUT
               - DELETE
+logging:
+  level:
+    org.springframework.security: DEBUG
+

@@ -10,6 +10,7 @@ export class ProductsComponent implements OnInit {
   products : any;
   constructor(private http:HttpClient) { }
 //http://localhost:9999/inventory-service/products?projection=fullProduct"
+  ///api/products?projection=fullProduct
   ngOnInit(): void {
     this.http.get("/api/products?projection=fullProduct")
       .subscribe({
