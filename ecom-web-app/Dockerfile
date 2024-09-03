@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN yarn install
 
 # Copy the rest of the application code
 COPY . .
 
 # Build the Angular application
-RUN npm run build
+RUN yarn run build
 
 # Stage 2: Serve the application with Nginx
 FROM nginx:alpine
@@ -22,7 +22,7 @@ FROM nginx:alpine
 # Copy the built application from the previous stage
 COPY --from=build /app/dist/ecom-web-app /usr/share/nginx/html
 
-#COPY /mnt/c/Users/user/IdeaProjects/MCS/MCS-Architecture-Consul-Config-Gateway-Feign-Resilience4J/default.conf /etc/nginx/conf.d/default.conf
+#COPY default.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
