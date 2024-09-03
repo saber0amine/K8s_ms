@@ -62,7 +62,7 @@ pipeline {
                           kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/customer-service.yml
                           kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
                           kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
-                           kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/web-clien.yml
+                           kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
                            kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
 
 
