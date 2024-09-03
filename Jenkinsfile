@@ -53,7 +53,7 @@ pipeline {
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
                              kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/postgres-service.yml
-                            kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/postgres-service.yml
+                            kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/keycloak-service.yml
                              kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/keycloak-service.yml
 
                             '''
