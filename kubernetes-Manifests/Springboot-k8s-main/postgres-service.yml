@@ -1,18 +1,32 @@
 apiVersion: v1
-kind: ConfigMap
+kind: PersistentVolume
 metadata:
-  name: postgres-config
-data:
-  POSTGRES_DB: "keycloak"
-  POSTGRES_USER: "dbuser"
+  name: postgres-pv
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  hostPath:
+    path: "/var/lib/docker/volumes/database_postgres_data/_data"
+    type: DirectoryOrCreate
+
 ---
 apiVersion: v1
-kind: Secret
+kind: PersistentVolumeClaim
 metadata:
-  name: postgres-secret
-type: Opaque
-stringData:
-  POSTGRES_PASSWORD: "saber"
+  name: postgres-pvc
+spec:
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -40,11 +54,12 @@ spec:
                 name: postgres-secret
           volumeMounts:
             - name: postgres-storage
-              mountPath: /var/lib/docker/volumes/database_postgres_data/_data
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
       volumes:
         - name: postgres-storage
-          hostPath:
-            path: /var/lib/docker/volumes/database_postgres_data/_data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
 ---
 apiVersion: v1
 kind: Service
