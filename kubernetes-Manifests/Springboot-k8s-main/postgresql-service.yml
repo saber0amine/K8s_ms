@@ -1,39 +1,18 @@
 apiVersion: v1
-kind: PersistentVolume
+kind: ConfigMap
 metadata:
-  name: postgres-pv
-spec:
-  capacity:
-    storage: 5Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  local:
-    path: /var/lib/docker/volumes/database_postgres_data/_data
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - minikube
-
+  name: postgres-config
+data:
+  POSTGRES_DB: "keycloak"
+  POSTGRES_USER: "dbuser"
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: Secret
 metadata:
-  name: postgres-pvc
-spec:
-  storageClassName: local-storage
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-
+  name: postgres-secret
+type: Opaque
+stringData:
+  POSTGRES_PASSWORD: "saber"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -61,11 +40,11 @@ spec:
                 name: postgres-secret
           volumeMounts:
             - name: postgres-storage
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/docker/volumes/database_postgres_data/_data
       volumes:
         - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-pvc
+          hostPath:
+            path: /var/lib/docker/volumes/database_postgres_data/_data
 ---
 apiVersion: v1
 kind: Service
