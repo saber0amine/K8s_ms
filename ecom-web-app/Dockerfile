@@ -22,7 +22,7 @@ FROM nginx:alpine
 # Copy the built application from the previous stage
 COPY --from=build /app/dist/ecom-web-app /usr/share/nginx/html
 
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY /mnt/c/Users/user/IdeaProjects/MCS/MCS-Architecture-Consul-Config-Gateway-Feign-Resilience4J/default.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
