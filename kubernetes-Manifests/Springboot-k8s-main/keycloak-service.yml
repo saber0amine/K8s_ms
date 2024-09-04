@@ -11,7 +11,8 @@ data:
   KC_HTTP_ENABLED: "true"
   KC_PROXY: "edge"
   KEYCLOAK_ADMIN: "saber"
-
+  KEYCLOAK_FRONTEND_URL: "http://localhost:31095/auth"
+  KEYCLOAK_COOKIE_SAMESITE: "none"
 ---
 apiVersion: v1
 kind: Secret
