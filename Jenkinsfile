@@ -18,7 +18,7 @@ pipeline {
 //                       docker.build("${REGISTRY}/config-service:0.0.1", "config-service/")
 //
 //                          docker.build("${REGISTRY}/geteway-service:0.0.1", "geteway-service/")
-          //              docker.build("${REGISTRY}/web-client:0.0.1", "ecom-web-app/")
+        //              docker.build("${REGISTRY}/web-client:0.0.1", "ecom-web-app/")
 
                     }
                 }

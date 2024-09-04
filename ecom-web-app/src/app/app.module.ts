@@ -15,7 +15,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:31095',
+        url: 'http://keyclaok:31095',
         realm: 'amasoft-realm',
         clientId: 'amasoft-angular-app'
       },
