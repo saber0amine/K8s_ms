@@ -51,20 +51,13 @@ pipeline {
                             sh '''
                             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-                                  kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
-                                  kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
-                                  kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/customer-service.yml
-                                  kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/customer-service.yml
-                                  kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
-                                  kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
-                                  kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/cloud-geteway.yml
-                                  kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/cloud-geteway.yml
-                                  kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/config-server.yml
-                                  kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/config-server.yml
-                                  kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/service-registry.yml
-                                  kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/service-registry.yml
-                                  kubectl delete -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
-                                  kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
+                                   kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/order-service.yml
+                                   kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/customer-service.yml
+                                   kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/inventory-service.yml
+                                   kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/cloud-geteway.yml
+                                   kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/config-server.yml
+                                   kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/service-registry.yml
+                                   kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
 
                             '''
                         }
