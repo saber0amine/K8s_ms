@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableWebSecurity
+//@EnableWebSecurity
 public class GetewayServiceApplication {
 
 	public static void main(String[] args) {
