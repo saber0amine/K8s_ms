@@ -1,13 +1,13 @@
-// import {APP_INITIALIZER, NgModule} from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-//
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
-// import { ProductsComponent } from './products/products.component';
-// import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-// import { CustomersComponent } from './customers/customers.component';
-// import { OrdersComponent } from './orders/orders.component';
-// import { OrderDetailsComponent } from './order-details/order-details.component';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ProductsComponent } from './products/products.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { CustomersComponent } from './customers/customers.component';
+import { OrdersComponent } from './orders/orders.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 // import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 // import {AuthInterceptor} from "./services/AuthInterceptor";
 //
@@ -36,24 +36,23 @@
 //       console.dir(error);
 //     });
 // }
-// @NgModule({
-//   declarations: [
-//     AppComponent,
-//     ProductsComponent,
-//     CustomersComponent,
-//     OrdersComponent,
-//     OrderDetailsComponent
-//   ],
-//   imports: [
-//     BrowserModule,
-//     AppRoutingModule,
-//     HttpClientModule ,
-//     KeycloakAngularModule
-//   ],
-//   providers: [    {provide : APP_INITIALIZER, deps : [KeycloakService],useFactory : initializeKeycloak, multi : true} ,
-//     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-//
-//   ],
-//   bootstrap: [AppComponent]
-// })
-// export class AppModule { }
+@NgModule({
+  declarations: [
+    AppComponent,
+    ProductsComponent,
+    CustomersComponent,
+    OrdersComponent,
+    OrderDetailsComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule ,
+    // KeycloakAngularModule
+  ],
+  providers: [  // {provide : APP_INITIALIZER, deps : [KeycloakService],useFactory : initializeKeycloak, multi : true} ,
+  //  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
