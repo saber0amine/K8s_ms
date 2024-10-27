@@ -57,7 +57,6 @@ pipeline {
                                    kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/cloud-geteway.yml
                                    kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/config-server.yml
                                    kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/service-registry.yml
-                                   //kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/web-client.yml
 
                             '''
                         }
