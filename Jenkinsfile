@@ -59,14 +59,10 @@ pipeline {
                                    kubectl apply -f  kubernetes-Manifests/Springboot-k8s-main/service-registry.yml
 
 
-                                    kubectl delete -f  kubernetes-Manifests/observability-manifests/tempo.yml
-                                    kubectl apply -f  kubernetes-Manifests/observability-manifests/tempo.yml
-                                    kubectl delete -f  kubernetes-Manifests/observability-manifests/loki.yml
-                                    kubectl apply -f  kubernetes-Manifests/observability-manifests/loki.yml
-                                    kubectl delete -f  kubernetes-Manifests/observability-manifests/promo.yml
-                                    kubectl apply -f  kubernetes-Manifests/observability-manifests/promo.yml
-                                    kubectl delete -f  kubernetes-Manifests/observability-manifests/grafana.yml
-                                    kubectl apply -f  kubernetes-Manifests/observability-manifests/grafana.yml
+                                     kubectl apply -f  kubernetes-Manifests/observability-manifests/tempo.yml
+                                     kubectl apply -f  kubernetes-Manifests/observability-manifests/loki.yml
+                                     kubectl apply -f  kubernetes-Manifests/observability-manifests/promo.yml
+                                     kubectl apply -f  kubernetes-Manifests/observability-manifests/grafana.yml
 
                             '''
                         }
